@@ -277,7 +277,7 @@ async def on_message(message):
 
 
     if message.content == 's!st':
-        await message.channel.send('::status window　私のステータスが見たいなんて、君もエッチだな')
+        await message.channel.send('::status ')
 
     # 「りせ」と発言したら「::re」が返る処理
     if message.content == 's!re':
