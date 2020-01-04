@@ -361,7 +361,7 @@ async def on_message_edit(before,after):
                 log_embed.add_field(name = "**‣LvUPチャンネルName**" ,value = f"『{after.channel.name}』",inline = False)
                 log_embed.add_field(name = "**‣LvUPチャンネルID**" ,value = f"『{after.channel.id}』",inline = False)
                 log_embed.set_footer(text = f"{dateTime.year}年{dateTime.month}月{dateTime.day}日　{dateTime.hour}時{dateTime.minute}分{dateTime.second}秒")
-                lvlog_ch = client.get_channel(660817503597101099)
+                lvlog_ch = client.get_channel(660480078513307659)
                 await lvlog_ch.send(embed = log_embed)
 
         await asyncio.sleep(0.5)
