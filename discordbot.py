@@ -23,7 +23,7 @@ test_ch = None
 test_ch_numch = None
 test_ch_num = 0
 test_flag = False
-t_flag = False
+t_flag = True
 t_ch = None
 
 @tasks.loop(seconds=30)
