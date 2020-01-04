@@ -347,18 +347,10 @@ async def on_message_edit(before,after):
                 if f"{client.user.mention}はレベルアップした！" in after.embeds[0].description:
                     dateTime = datetime.now(JST)
                     lv = after.embeds[0].description.split("`")[1]
-                    embed = discord.Embed(
-                        title = "━<:Lv:643122451500367902><:UP:643122445213106176>━",
-                        description = f"**__{lv}__**",
-                        color = discord.Color.green())
-                    embed.set_footer(text = f"{dateTime.year}年{dateTime.month}月{dateTime.day}日　{dateTime.hour}時{dateTime.minute}分{dateTime.second}秒")
-                    [await c.send(embed=embed) for c in client.get_all_channels() if c.name == "yuiレベルアップログ"]
                     log_embed = discord.Embed(
-                        title = "━<:Lv:643122451500367902><:UP:643122445213106176>━",
+                        title = "━LvUP━",
                         description = f"**__{lv}__**",
                         color = discord.Color.green())
-                    log_embed.add_field(name = "**‣LvUP鯖Name**" ,value = f"『{after.guild.name}』",inline = False)
-                    log_embed.add_field(name = "**‣LvUP鯖ID**" ,value = f"『{after.guild.id}』",inline = False)
                     log_embed.add_field(name = "**‣LvUPチャンネルName**" ,value = f"『{after.channel.name}』",inline = False)
                     log_embed.add_field(name = "**‣LvUPチャンネルID**" ,value = f"『{after.channel.id}』",inline = False)
                     log_embed.set_footer(text = f"{dateTime.year}年{dateTime.month}月{dateTime.day}日　{dateTime.hour}時{dateTime.minute}分{dateTime.second}秒")
