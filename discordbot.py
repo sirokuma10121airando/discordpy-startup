@@ -85,7 +85,7 @@ async def on_ready():
     print('‣BOT ID\n '+str(client.user.id))
     print('‣LOGIN TIME\n '+str(dateTime.now(JST)))
     print('◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢')
-
+    await t_ch.send("::t start")
 
 @client.event
 async def on_message(message):
@@ -195,39 +195,15 @@ async def on_message(message):
 
 
     if message.channel==test_ch and test_flag==True:
-        if f"{me.display_name}はやられてしまった" in message.content:
-            def test_check (d_msg):
-                if d_msg.author != tao:
-                    return 0
-                if d_msg.channel!=test_ch:
-                    return 0
-                return 1
-            try:
-                t_res=await client.wait_for('message',timeout=3,check = test_check)
-            except asyncio.TimeoutError:
-                await test_ch.send('::item e 残念ペットは攻撃しなかったね！')
-            else:
-                if ']の攻撃' in t_res.content and 'のHP' in t_res.content:
-                    await test_ch.send(f'::item e あ、petナイスアタック')
+        if f"{me.name}はやられてしまった" in message.content:
+            await asyncio.sleep(0.5)
+            await message.channel.send("::i e")
 
 
 
-        elif f"{me.display_name}の攻撃" in message.content and "のHP" in message.content and not "やられてしまった" in message.content:
+        elif f"{me.name}の攻撃" in message.content and f"{me.name}のHP" in message.content and not f"{me.name}はやられてしまった" in message.content:
 
-            def test_check (d_msg):
-                if d_msg.author != tao:
-                    return 0
-                if d_msg.channel!=test_ch:
-                    return 0
-                return 1
-
-            try:
-                t_res=await client.wait_for('message',timeout=3,check = test_check)
-            except asyncio.TimeoutError:
-                await test_ch.send('::attack pet攻撃して欲しい')
-            else:
-                if ']の攻撃' in t_res.content and 'のHP' in t_res.content:
-                    await test_ch.send(f'::attack ')
+            await test_ch.send('::attack ')
 
 
         elif message.embeds and message.embeds[0].description:
@@ -246,11 +222,6 @@ async def on_message(message):
 
     global t_flag
     t_ch = client.get_channel(660456253524541456)
-    if message.channel == t_ch and message.author == tao and t_flag==True:
-        if message.embeds:
-            if "正解" in message.embeds[0].description:
-                await asyncio.sleep(0.3)
-                await t_ch.send("::t")
 
     if message.channel == t_ch:
         if message.embeds:
