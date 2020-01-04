@@ -24,7 +24,7 @@ test_ch_numch = None
 test_ch_num = 0
 test_flag = False
 t_flag = False
-
+t_ch = None
 
 @tasks.loop(seconds=30)
 async def t_loop():
@@ -79,6 +79,8 @@ async def on_ready():
     st_loop.start()
     test_check_loop.start()
     t_loop.start()
+    global t_ch
+    t_ch = client.get_channel(660456253524541456)
     await client.change_presence(activity=discord.Game(name="s!help│専属BOTです！"))
     print('◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢')
     print("‣BOT NAME\n '+(client.user.name)")
