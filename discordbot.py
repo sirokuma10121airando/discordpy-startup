@@ -187,7 +187,7 @@ async def on_message(message):
             exp=int(lv)*100
         embed=discord.Embed(
         title=f'**モンスター出現ログ**\n**Name:**{name}\n**Type Rank:**\n{type}┃{rank}\n**Status:**\nLv.{lv}┃HP.{hp}\n**Exp:**\n{exp}',
-        description = f"**出現チャンネル**\n{message.channel.nmention}",
+        description = f"**出現チャンネル**\n{message.channel.mention}",
         color=discord.Color.green())
         embed.set_thumbnail(url=image_url)
         embed.set_footer(text = datetime.now(JST))
@@ -356,7 +356,7 @@ async def on_message_edit(before,after):
                     lvlog_ch = client.get_channel(660480078513307659)
                     await lvlog_ch.send(embed = log_embed)
 
-        await asyncio.sleep(0.5)
-        edit_flag = True
+            await asyncio.sleep(0.1)
+            edit_flag = True
 
 client.run(TOKEN)
