@@ -174,7 +174,6 @@ async def on_message(message):
         name=message.embeds[0].title.split('】')[1].split('が待ち構えている')[0]
         image_url=message.embeds[0].image.url
         hp=message.embeds[0].title.split(':')[3]
-        invite = await message.channel.create_invite()
         logch=client.get_channel(659965763050012703)
         exp=int(lv)
         if rank=='超強敵' or rank=='レア':
@@ -188,7 +187,7 @@ async def on_message(message):
             exp=int(lv)*100
         embed=discord.Embed(
         title=f'**モンスター出現ログ**\n**Name:**{name}\n**Type Rank:**\n{type}┃{rank}\n**Status:**\nLv.{lv}┃HP.{hp}\n**Exp:**\n{exp}',
-        description = f"[このモンスターへの直通URL]({invite.url})",
+        description = f"**出現チャンネル**\n{message.channel.nmention}",
         color=discord.Color.green())
         embed.set_thumbnail(url=image_url)
         embed.set_footer(text = datetime.now(JST))
