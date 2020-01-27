@@ -331,24 +331,28 @@ async def on_message(message):
         await message.channel.send('::login')
 
 
-    if message.content.startswith('s!sinka2 '):
-        react=message.content.split(' ')
-        await message.channel.send('::sinka')
-        def msg_check(msg):
-            if msg.author!=tao:
+    if message.content.startswith('s!sinka '):
+        num=message.content.split('s!sinka ')
+        def role_check(tao_msg):
+            if not tao_msg.embeds:
                 return 0
-            if msg.channel!=message.channel:
+            if tao_msg.channel != message.channel:
                 return 0
             return 1
-        try:
-            re_msg = await client.wait_for('message',timeout=5,check=msg_check)
-        except asyncio.TimeoutError:
-            pass
-        else:
-            re_msg.add_reaction(react[1])
-            await asyncio.sleep(4)
-            re_msg.add_reaction(react[2])
 
+        try:
+            ans_msg = await client.wait_for('message', timeout=40, check=role_check)
+        except:
+            embed = discord.Embed(title='Error!!', description='もう一度試して見てね（￣▽￣;）\nもしかして以下の点が該当してないかな？\n‣TAOからの反応が40秒以内に来なかった\n‣TAOがオフライン\n‣TAOが修理中', color=discord.Color.green())
+            await message.channel.send(embed=embed)
+        else:
+            await asyncio.sleep(2)
+            re_msg.add_reaction('👍')
+            await asyncio.sleep(4)
+            if '0' == num:
+                await re_msg.add_reaction(':zero:')
+            elif '1' == num:
+                await re_msg.add_reaction(':one:')
 
 @client.event
 async def on_message_edit(before,after):
