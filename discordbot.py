@@ -26,6 +26,7 @@ test_flag = False
 t_flag = True
 t_ch = None
 
+
 @tasks.loop(seconds=30)
 async def t_loop():
     if t_flag==True:
@@ -272,7 +273,6 @@ async def on_message(message):
 
     if message.content=='s!sinka':
         await message.channel.send('::sinka')
-        reaction=message.content.split(' ')[1]
         def role_check(tao_msg):
             if not tao_msg.embeds:
                 return 0
