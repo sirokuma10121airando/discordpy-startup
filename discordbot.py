@@ -333,6 +333,7 @@ async def on_message(message):
 
     if message.content.startswith('s!sinka '):
         num=message.content.split('s!sinka ')
+        await message.channel.send('::sinka')
         def role_check(tao_msg):
             if not tao_msg.embeds:
                 return 0
