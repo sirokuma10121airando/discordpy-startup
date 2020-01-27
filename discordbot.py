@@ -339,14 +339,14 @@ async def on_message(message):
             if msg.channel!=message.channel:
                 return 0
             return 1
-            try:
-                re_msg=await client.wait_for('message',timeout=5,check=msg_check)
-            except asyncio.TimeoutError:
-                pass
-            else:
-                re_msg.add_reaction(react[1])
-                await asyncio.sleep(4)
-                re_msg.add_reaction(react[2])
+        try:
+            re_msg = await client.wait_for('message',timeout=5,check=msg_check)
+        except asyncio.TimeoutError:
+            pass
+        else:
+            re_msg.add_reaction(react[1])
+            await asyncio.sleep(4)
+            re_msg.add_reaction(react[2])
 
 
 @client.event
