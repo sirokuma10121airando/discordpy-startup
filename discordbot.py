@@ -270,7 +270,7 @@ async def on_message(message):
     if message.content == 's!rmap':
         await message.channel.send('::rmap')
 
-    if message.content.startswith('s!sinka '):
+    if message.content.startswith('s!sinka0 '):
         await message.channel.send('::sinka')
         reaction=message.content.split(' ')[1]
         def role_check(tao_msg):
