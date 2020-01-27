@@ -331,7 +331,7 @@ async def on_message(message):
         await message.channel.send('::login')
 
 
-    if message.content.startswith('s!sinka '):
+    if message.content.startswith('s!sinka2 '):
         react=message.content.split(' ')
         def msg_check(msg):
             if msg.author!=tao:
