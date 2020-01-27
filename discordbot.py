@@ -160,7 +160,7 @@ async def on_message(message):
         await message.author.send(embed=embed)
 
     if message.channel == test_ch and message.embeds and test_flag==True:
-        if message.embeds[0].title and 'が待ち構えている' in message.embeds[0].title:
+        if message.embeds[0].title and 'が待ち構えている' in message.embeds[0].title and not '超激レア' in message.embeds[0].title:
             if test_ch.id == 660434662597984266:
                 lv=message.embeds[0].title.split('Lv.')[1].split(' ')[0]
                 await test_ch.edit(name=f'┃honpen┃lv.{lv}')
@@ -330,6 +330,23 @@ async def on_message(message):
     if message.content == 's!login':
         await message.channel.send('::login')
 
+
+    if message.content.startswith('s!sinka '):
+        react=message.content.split(' ')
+        def msg_check(msg):
+            if msg.author!=tao:
+                return 0
+            if msg.channel!=message.channel:
+                return 0
+            return 1
+            try:
+                re_msg=await client.wait_for('message',timeout=5,check=msg_check)
+            except asyncio.TimeoutError:
+                pass
+            else:
+                re_msg.add_reaction(react[1])
+                await asyncio.sleep(4)
+                re_msg.add_reaction(react[2])
 
 
 @client.event
