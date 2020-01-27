@@ -350,7 +350,7 @@ async def on_message(message):
             await asyncio.sleep(2)
             await re_msg.add_reaction('👍')
             await asyncio.sleep(4)
-            await re_msg.add_reaction(':zero:')
+            await re_msg.add_reaction('0️⃣')
  
     if message.content.startswith('s!sinka 1'):
         num=message.content.split('s!sinka ')
@@ -372,7 +372,7 @@ async def on_message(message):
             await re_msg.add_reaction('👍')
             await asyncio.sleep(4)
 
-            await re_msg.add_reaction(':one:')
+            await re_msg.add_reaction('1️⃣')
 
 @client.event
 async def on_message_edit(before,after):
