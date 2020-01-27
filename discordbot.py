@@ -272,7 +272,7 @@ async def on_message(message):
 
     if message.content.startswith('s!sinka '):
         await message.channel.send('::sinka')
-        reaction=message.content.split('s!sinka ')[1]
+        reaction=message.content.split(' ')[1]
         def role_check(tao_msg):
             if not tao_msg.embeds:
                 return 0
@@ -333,6 +333,7 @@ async def on_message(message):
 
     if message.content.startswith('s!sinka2 '):
         react=message.content.split(' ')
+        await message.channel.send('::sinka')
         def msg_check(msg):
             if msg.author!=tao:
                 return 0
