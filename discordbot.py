@@ -29,8 +29,26 @@ t_ch = None
 
 @tasks.loop(seconds=30)
 async def loop():
-    dateTime = datetime.now(JST)
-    if dateTime.hour == 0
+   
+    now = datetime.now(JST).strftime('%H:%M')
+    if now == '00:00':
+        channel = client.get_channel(680981196951650338)
+        await channel.send('::login')
+        def login_check(tao_msg):
+            if not tao_msg.embeds:
+                return 0
+            if tao_msg.channel != channel:
+                return 0
+            return 1
+
+        try:
+            ans_msg = await client.wait_for('message', timeout=4, check=login_check)
+        except:
+            await channel.send('::login')
+        else:
+            ch = client.get_channel(674609261078249502)
+            await ch.send('ログインしたよ!!')
+  
 
 
     if t_flag==True:
