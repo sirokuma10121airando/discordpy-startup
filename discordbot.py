@@ -124,7 +124,7 @@ async def on_message(message):
             color=discord.Colour.green())
         embed_0.add_field(
             name = "BotName",
-            value = client.user.name)
+            value = f'`{client.user.name}`')
         embed_0.add_field(
             name = "BotID",
             value = "`client.user.id`")
