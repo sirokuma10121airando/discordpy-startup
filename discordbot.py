@@ -138,8 +138,8 @@ async def on_message(message):
             name = "Prefix",
             value = "`s!`")        
         embed_0.add_field(
-            name = "Cleated",
-            value = f"`{client.user.cleated_at}`")
+            name = "Created",
+            value = f"`{client.user.created_at}`")
         embed_0.set_footer(
             icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681017000058945540/94_20200223145532.png",
             text = 'P.1/3')
