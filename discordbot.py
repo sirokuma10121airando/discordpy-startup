@@ -210,7 +210,7 @@ async def on_message(message):
         color=discord.Color.green())
         embed.set_thumbnail(url=image_url)
         embed.set_footer(text = datetime.now(JST))
-        log_ch = client.get_channel(660445668074061834)
+        log_ch = client.get_channel(680984354666840116)
         await log_ch.send(embed=embed)
 
 
