@@ -130,7 +130,7 @@ async def on_message(message):
             description=f"{desc}",color=discord.Colour.green())
         embed.set_footer(
             icon_url = message.author.avatar_url,
-            text = author｜message.author)
+            text = 'author｜{message.author}')
 
         await message.channel.send(embed=embed)
 
