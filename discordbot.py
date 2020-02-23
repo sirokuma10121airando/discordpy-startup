@@ -107,7 +107,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-
+    developer = client.get_user(446610711230152706)
     if message.content=='s!ping':
 
         embed=discord.Embed(title='**Ping測定中**')
@@ -118,22 +118,109 @@ async def on_message(message):
 
 
     if message.content == "s!help":
-        desc = 's!say [内容]\n```言ったことをオウム返しだよ```'
-        desc += "\ns!ping```現在のサクラのping値を測定するよ```"
-        desc += "\ns!ch [チャンネルメンション]\n```指定チャンネルで自動で戦うよ```"
-        desc += "\ns!stop\n```上のシステムを止めるよ```"
-        desc += "\ns!tstart\n```トレーニングをする（はずだ）よ```"
-        desc += "\ns!tstop\n```トレーニングを終わらせる（はずだ）よ```"
+        embed_0 = discord.Embed(
+            title="Bot Information",
+            description=f"サクラの基礎情報です",
+            color=discord.Colour.green())
+        embed_0.add_field(
+            name = "BotName",
+            value = client.user.name)
+        embed_0.add_field(
+            name = "BotID",
+            value = "`client.user.id`")
+        embed_0.add_field(
+            name = "Developer",
+            value = f'`{developer}`')
+        embed_0.add_field(
+            name = "Coding Language",
+            value = '`Python3.7.x`')
+        embed_0.add_field(
+            name = "Prefix",
+            value = "`s!`")        
+        embed_0.add_field(
+            name = "Cleated",
+            value = f"`{client.user.cleated_at}`")
+        embed_0.set_footer(
+            icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681017000058945540/94_20200223145532.png",
+            text = 'P.1/3')
 
-        embed = discord.Embed(
-            title="サクラ取扱説明書",
-            description=f"{desc}",color=discord.Colour.green())
-        embed.set_footer(
-            icon_url = message.author.avatar_url,
-            text = 'author｜{message.author}')
+        desc  = "**say [内容]**```言ったことをオウム返しだよ```"
+        desc += "**ping**```現在のサクラのping値を測定するよ```"
+        desc += "**ch [チャンネルメンション]**```指定チャンネルで自動で戦うよ```"
+        desc += "**stop**```上のシステムを止めるよ```"
+        desc += "**tstart**```トレーニングをする（はずだ）よ```"
+        desc += "**tstop**```トレーニングを終わらせる（はずだ）よ```"
+        embed_1 = discord.Embed(
+            title = "TAOコマンド",
+            description = desc,
+            color = discord.Color.green()
+            )
+        embed_1.set_footer(
+            icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681017006803255351/94_20200223145605.png",
+            text = 'P.2/3')
 
-        await message.channel.send(embed=embed)
+        desc2  = "**sinka**```職業分岐が無い進化```"
+        desc2 += "**sinka [0,1]**```職業分岐がある進化\n選択画面で0か1のどちらにリアクションするかを選べる\n(画像参照)```"
+        embed_1 = discord.Embed(
+            title = "TAO特殊コマンド(sinka)",
+            description = desc,
+            color = discord.Color.green()
+            )
+        embed_1.set_image(url = 'https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png')
+        embed_1.set_footer(
+            icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png",
+            text = 'P.3/3')
 
+        page_count = 0  # ヘルプの現在表示しているページ数
+        page_content_list = [
+            embed_0,
+            embed_1,
+            embed_2
+            ]  # ヘルプの各ページ内容
+
+        send_message = await message.channel.send(embed=page_content_list[0])  # 最初のページ投稿
+        await send_message.add_reaction("➡️")
+
+        def help_react_check(reaction, user):
+
+            if reaction.message.id != send_message.id:
+                return 0
+            if reaction.emoji in ['⬅️', '➡️','🗑']:
+                if user != message.author:
+                    return 0
+                else:
+                    return reaction, user
+
+        while not client.is_closed():
+
+            try:
+                reaction, user = await client.wait_for('reaction_add', check=help_react_check, timeout=40.0)
+            except:
+                return
+
+            else:
+
+                if reaction.emoji == "➡️" and page_count < 2:
+                    page_count += 1
+                if reaction.emoji == "⬅️" and page_count > 0:
+                    page_count -= 1
+                if reaction.emoji == 🗑:
+                    await send_message.delete()
+
+                await send_message.clear_reactions()
+                await send_message.edit(embed=page_content_list[page_count])
+                reactions = ["⬅️","🗑","➡️"]
+                reactions0 = ["🗑","➡️"]
+                reactions1 = ["⬅️","🗑"]
+                if page_count == 0:
+                    for reaction in reactions0:
+                        await send_message.add_reaction(reaction)
+                elif page_count == 1:
+                    for reaction in reactions:
+                        await send_message.add_reaction(reaction)
+                elif page_count == 2:
+                    for reaction in reactions1:
+                        await send_message.add_reaction(reaction)
 
     me = client.user
     tao = client.get_user(526620171658330112)
