@@ -28,7 +28,11 @@ t_ch = None
 
 
 @tasks.loop(seconds=30)
-async def t_loop():
+async def loop():
+    dateTime = datetime.now(JST)
+    if dateTime.hour == 0
+
+
     if t_flag==True:
         t_ch = client.get_channel(660456253524541456)
         tao=client.get_user(526620171658330112)
@@ -47,8 +51,6 @@ async def t_loop():
             else:
                 pass
 
-@tasks.loop(seconds=30)
-async def test_check_loop():
     if test_flag==True:
         tao=client.get_user(526620171658330112)
         if tao:
@@ -66,9 +68,6 @@ async def test_check_loop():
             else:
                 pass
 
-
-@tasks.loop(seconds=60)
-async def st_loop():
     await client.change_presence(activity=discord.Game(name="s!help│専属BOTです！"))
 
 @client.event
@@ -77,9 +76,7 @@ async def on_ready():
 
     #起動時刻（日本時刻）
     dateTime = datetime.now(JST)
-    st_loop.start()
-    test_check_loop.start()
-    t_loop.start()
+    loop.start()
     global t_ch
     t_ch = client.get_channel(660456253524541456)
     await client.change_presence(activity=discord.Game(name="s!help│専属BOTです！"))
@@ -102,8 +99,6 @@ async def on_message(message):
         await msg.edit(embed=discord.Embed(title=f'**Pong!\n{result}ms**'))
 
 
-
-
     if message.content == "s!help":
         desc = 's!say [内容]\n```言ったことをオウム返しだよ```'
         desc += "\ns!ping```現在のサクラのping値を測定するよ```"
@@ -112,7 +107,13 @@ async def on_message(message):
         desc += "\ns!tstart\n```トレーニングをする（はずだ）よ```"
         desc += "\ns!tstop\n```トレーニングを終わらせる（はずだ）よ```"
 
-        embed = discord.Embed(title="サクラ取扱説明書",description=f"{desc}",color=discord.Colour.green())
+        embed = discord.Embed(
+            title="サクラ取扱説明書",
+            description=f"{desc}",color=discord.Colour.green())
+        embed.set_footer(
+            icon_url = message.author.avatar_url,
+            text = author｜message.author)
+
         await message.channel.send(embed=embed)
 
 
@@ -141,7 +142,7 @@ async def on_message(message):
         test_ch_m = message.content.split('s!ch ')[1]
         test_ch = discord.utils.get(message.guild.text_channels, mention=test_ch_m)
         embed=discord.Embed(
-            title=f"( 'ω'o[**testch**]oログ🌸",
+            title=f"( 'ω'o[**オートバトル**]oログ🌸",
             description=f'```使用者　│『{message.author}』\n使用者ID│『{message.author.id}』\n使用ch名│『{message.channel.name}』\n指定ch名│『{test_ch.name}』```チャンネルのメンション\n{test_ch.mention}'
         )
         embed.set_thumbnail(url=message.author.avatar_url)
@@ -180,7 +181,6 @@ async def on_message(message):
         if rank=='超強敵' or rank=='レア':
             exp=int(lv)*5
         elif rank=='激レア':
-
             exp=int(lv)*33
         elif rank=='強敵':
             exp=int(lv)*1.6
@@ -198,7 +198,7 @@ async def on_message(message):
 
     if message.channel==test_ch and test_flag==True:
         if f"{me.name}はやられてしまった" in message.content:
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.2)
             await message.channel.send("::i e")
 
 
@@ -210,11 +210,11 @@ async def on_message(message):
 
         elif message.embeds and message.embeds[0].description:
             if 'このチャンネルの全てのPETが全回復した！' in message.embeds[0].description:
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.2)
                 await test_ch.send('::attack 復活乁( ˙ ω˙乁)')
 
             elif f"{client.user.mention}はもうやられている！" in message.embeds[0].description:
-                await asyncio.sleep(0.5)
+                await asyncio.sleep(0.2)
                 await test_ch.send("::i e 復活！")
 
 
@@ -286,8 +286,9 @@ async def on_message(message):
             embed = discord.Embed(title='Error!!', description='もう一度試して見てね（￣▽￣;）\nもしかして以下の点が該当してないかな？\n‣TAOからの反応が40秒以内に来なかった\n‣TAOがオフライン\n‣TAOが修理中', color=discord.Color.green())
             await message.channel.send(embed=embed)
         else:
-            await asyncio.sleep(2)
+            await asyncio.sleep(3)
             await ans_msg.add_reaction('👍')
+
     if message.content.startswith('s!role '):
         role_num = message.content.split('s!role ')[1]
         if not role_num in ["0","1","2","3"]:
@@ -312,7 +313,7 @@ async def on_message(message):
                 embed = discord.Embed(title='Error!!', description='もう一度試して見てね（￣▽￣;）\nもしかして以下の点が該当してないかな？\n‣TAOからの反応が40秒以内に来なかった\n‣TAOがオフライン\n‣TAOが修理中', color=discord.Color.green())
                 await message.channel.send(embed=embed)
             else:
-                await asyncio.sleep(2)
+                await asyncio.sleep(6)
                 if role_num == '0':
                     await ans_msg.add_reaction(f'\u0030\u20e3')
                 elif role_num == '1':
@@ -371,7 +372,6 @@ async def on_message(message):
             await asyncio.sleep(2)
             await re_msg.add_reaction('👍')
             await asyncio.sleep(4)
-
             await re_msg.add_reaction('\u0031\u20e3')
 
 @client.event
@@ -382,7 +382,10 @@ async def on_message_edit(before,after):
             edit_flag=False
             
             if "正解" in after.embeds[0].description:
+                await asyncio.sleep(6)
                 await t_ch.send("::t Training")
+
+        
 
             if after.embeds and after.embeds[0].description:
                 if f"{client.user.mention}はレベルアップした！" in after.embeds[0].description:
@@ -397,8 +400,9 @@ async def on_message_edit(before,after):
                     log_embed.set_footer(text = f"{dateTime.year}年{dateTime.month}月{dateTime.day}日　{dateTime.hour}時{dateTime.minute}分{dateTime.second}秒")
                     lvlog_ch = client.get_channel(660480078513307659)
                     await lvlog_ch.send(embed = log_embed)
+                    await asyncio.sleep(0.1)
 
-            await asyncio.sleep(0.1)
-            edit_flag = True
+
+        edit_flag = True
 
 client.run(TOKEN)
