@@ -204,7 +204,7 @@ async def on_message(message):
                     page_count += 1
                 if reaction.emoji == "⬅️" and page_count > 0:
                     page_count -= 1
-                if reaction.emoji == 🗑:
+                if reaction.emoji == '🗑':
                     await send_message.delete()
 
                 await send_message.clear_reactions()
