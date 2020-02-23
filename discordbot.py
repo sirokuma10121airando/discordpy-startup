@@ -161,13 +161,13 @@ async def on_message(message):
 
         desc2  = "**sinka**```職業分岐が無い進化```"
         desc2 += "**sinka [0,1]**```職業分岐がある進化\n選択画面で0か1のどちらにリアクションするかを選べる\n(画像参照)```"
-        embed_1 = discord.Embed(
+        embed_2 = discord.Embed(
             title = "TAO特殊コマンド(sinka)",
-            description = desc,
+            description = desc2,
             color = discord.Color.green()
             )
-        embed_1.set_image(url = 'https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png')
-        embed_1.set_footer(
+        embed_2.set_image(url = 'https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png')
+        embed_2.set_footer(
             icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png",
             text = 'P.3/3')
 
