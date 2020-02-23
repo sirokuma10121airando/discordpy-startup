@@ -168,7 +168,7 @@ async def on_message(message):
             )
         embed_2.set_image(url = 'https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png')
         embed_2.set_footer(
-            icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681027785799761950/94_20200223154109.png",
+            icon_url = "https://cdn.discordapp.com/attachments/659916967628767252/681028057787662339/94_20200223154214.png",
             text = 'P.3/3')
 
         page_count = 0  # ヘルプの現在表示しているページ数
